@@ -1,11 +1,17 @@
 <?php
-$paswword_length = intval($_GET['password-length'] ?? 0);
+include __DIR__. '/session.php';
+
+$password_length = intval($_GET['password-length'] ?? 0);
 
 include __DIR__. '/function.php';
 
 //Save password to variable
-if($paswword_length !== 0){
-    $password = set_password($paswword_length);
+if($password_length !== 0){
+    
+    $_SESSION['password'] = set_password($password_length);
+    $_SESSION['password_length'] = $password_length;
+    header('Location: password-generated.php');
+    exit;
 }
 
 ?>
@@ -37,12 +43,6 @@ if($paswword_length !== 0){
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <?php if($paswword_length !== 0) { ?>
-            <div class="result">
-                <h2>The generated password is: <strong><?php echo implode($password) ?></strong></h2>
-                <p>La password è lungha <strong><?php echo $paswword_length ?> caratteri</strong></p>
-            </div>
-        <?php } ?>
     </main>
 </body>
 
