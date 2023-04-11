@@ -1,14 +1,15 @@
 <?php
-include __DIR__. '/session.php';
+include __DIR__ . '/session.php';
 
 $password_length = intval($_GET['password-length'] ?? 0);
-
-include __DIR__. '/function.php';
+include __DIR__ . '/function.php';
 
 //Save password to variable
-if($password_length !== 0){
-    
-    $_SESSION['password'] = set_password($password_length);
+if ($password_length !== 0) {
+
+    // $_SESSION['option'] = $option_selected;
+    $option_selected = ($_GET['letters'] ?? '')  . ($_GET['numbers'] ?? '') . ($_GET['specials'] ?? '');
+    $_SESSION['password'] = set_password($password_length, $option_selected);
     $_SESSION['password_length'] = $password_length;
     header('Location: password-generated.php');
     exit;
@@ -39,6 +40,24 @@ if($password_length !== 0){
                 <div class="mb-3">
                     <label for="password-length" class="form-label">Select password length</label>
                     <input type="number" class="form-control" id="password-length" name="password-length">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="letter" name="letters" checked>
+                    <label class="form-check-label" for="letter">
+                        Letters
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="2" id="number" name="numbers" checked>
+                    <label class="form-check-label" for="number">
+                        Numbers
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="3" id="special" name="specials" checked>
+                    <label class="form-check-label" for="special">
+                        Special characters
+                    </label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

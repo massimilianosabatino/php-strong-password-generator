@@ -3,6 +3,7 @@ include __DIR__. '/session.php';
 
 $password = $_SESSION['password'];
 $password_length = $_SESSION['password_length'];
+
 ?>
 
 <!DOCTYPE html>
