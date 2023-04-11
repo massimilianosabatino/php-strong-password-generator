@@ -1,41 +1,10 @@
 <?php
 $paswword_length = intval($_GET['password-length']);
 
-//Array letters lowercase and uppercase
-$letters = range('a', 'z');
-array_push($letters, ...range('A', 'Z'));
-
-//Array numbers
-$numbers = range(0, 9);
-
-//Array special characters
-$special = ['/', '[', '\\', '\'', '^', '£', '$', '%', '&', '*', '(', ')', '}', '{', '@', '#', '~', '?', '>', '<', '>', ',', '|', ',', '=', '_', '+', '!', '-', ']'];
-
-//Function to generate random password (Arguments are: password length, array letters, array number, array special characters)
-function set_password($length, $letter, $number, $character)
-{
-    for ($i = 0; $i < $length; $i++) {
-
-        //Random array select 
-        $type = random_int(1, 3);
-
-        if ($type === 1) {
-            $select = $letter[random_int(0, count($letter) - 1)];
-        }
-        if ($type === 2) {
-            $select = $number[random_int(0, count($number) - 1)];
-        }
-        if ($type === 3) {
-            $select = $character[random_int(0, count($character) - 1)];
-        }
-
-        $password[] = $select;
-    };
-    return $password;
-}
+include __DIR__. '/function.php';
 
 //Save password to variable
-$password = set_password($paswword_length, $letters, $numbers, $special);
+$password = set_password($paswword_length);
 
 ?>
 
@@ -60,7 +29,7 @@ $password = set_password($paswword_length, $letters, $numbers, $special);
         <div class="form mb-4">
             <form action="index.php" method="get">
                 <div class="mb-3">
-                    <label for="password-length" class="form-label">Select paswword length</label>
+                    <label for="password-length" class="form-label">Select password length</label>
                     <input type="number" class="form-control" id="password-length" name="password-length">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
