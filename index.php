@@ -1,7 +1,6 @@
 <?php
 $paswword_length = intval($_GET['password-length']);
 
-var_dump($paswword_length);
 //Array letters lowercase and uppercase
 $letters = range('a', 'z');
 array_push($letters, ...range('A', 'Z'));
@@ -38,11 +37,6 @@ function set_password($length, $letter, $number, $character)
 //Save password to variable
 $password = set_password($paswword_length, $letters, $numbers, $special);
 
-//print variable
-foreach ($password as $el) {
-    echo $el;
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -62,14 +56,20 @@ foreach ($password as $el) {
     <header>
         <h1>Password generator</h1>
     </header>
-    <main>
-        <form action="index.php" method="get">
-            <div class="mb-3">
-                <label for="password-length" class="form-label">Select paswword length</label>
-                <input type="number" class="form-control" id="password-length" name="password-length">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    <main class="p-3">
+        <div class="form mb-4">
+            <form action="index.php" method="get">
+                <div class="mb-3">
+                    <label for="password-length" class="form-label">Select paswword length</label>
+                    <input type="number" class="form-control" id="password-length" name="password-length">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="result">
+            <h2>The generated password is: <strong><?php echo implode($password) ?></strong></h2>
+            <p>La password è lungha <strong><?php echo $paswword_length ?> caratteri</strong></p>
+        </div>
     </main>
 </body>
 
