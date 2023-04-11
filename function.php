@@ -2,7 +2,7 @@
 
 //Function to generate random password (Arguments are: password length, array letters, array number, array special characters)
 function set_password($length) {
-
+    
     //Array letters lowercase and uppercase
     $letters = range('a', 'z');
     array_push($letters, ...range('A', 'Z'));

@@ -1,10 +1,12 @@
 <?php
-$paswword_length = intval($_GET['password-length']);
+$paswword_length = intval($_GET['password-length'] ?? 0);
 
 include __DIR__. '/function.php';
 
 //Save password to variable
-$password = set_password($paswword_length);
+if($paswword_length !== 0){
+    $password = set_password($paswword_length);
+}
 
 ?>
 
@@ -35,10 +37,12 @@ $password = set_password($paswword_length);
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <div class="result">
-            <h2>The generated password is: <strong><?php echo implode($password) ?></strong></h2>
-            <p>La password è lungha <strong><?php echo $paswword_length ?> caratteri</strong></p>
-        </div>
+        <?php if($paswword_length !== 0) { ?>
+            <div class="result">
+                <h2>The generated password is: <strong><?php echo implode($password) ?></strong></h2>
+                <p>La password è lungha <strong><?php echo $paswword_length ?> caratteri</strong></p>
+            </div>
+        <?php } ?>
     </main>
 </body>
 
