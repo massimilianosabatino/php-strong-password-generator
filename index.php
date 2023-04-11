@@ -1,6 +1,18 @@
 <?php
 include __DIR__ . '/session.php';
 
+if(isset($_GET['err'])){
+    switch ($_GET['err']) {
+        case 'need-opt':
+            echo 'Select at least one option';
+            break;
+        
+        default:
+            echo 'Undefined error';
+            break;
+    }
+}
+
 $password_length = intval($_GET['password-length'] ?? 0);
 include __DIR__ . '/function.php';
 

@@ -1,44 +1,5 @@
 <?php
 
-// include __DIR__. '/session.php';
-
-
-
-
-
-//Function to generate random password (Arguments are: password length, array letters, array number, array special characters)
-// function set_password($length) {
-    
-//     //Array letters lowercase and uppercase
-//     $letters = range('a', 'z');
-//     array_push($letters, ...range('A', 'Z'));
-
-//     //Array numbers
-//     $numbers = range(0, 9);
-
-//     //Array special characters
-//     $special = ['/', '[', '\\', '\'', '^', '£', '$', '%', '&', '*', '(', ')', '}', '{', '@', '#', '~', '?', '>', '<', '>', ',', '|', ',', '=', '_', '+', '!', '-', ']'];
-
-//     for ($i = 0; $i < $length; $i++) {
-
-//         //Random array select 
-//         $type = random_int(1, 3);
-
-//         if ($type === 1) {
-//             $select = $letters[random_int(0, count($letters) - 1)];
-//         }
-//         if ($type === 2) {
-//             $select = $numbers[random_int(0, count($numbers) - 1)];
-//         }
-//         if ($type === 3) {
-//             $select = $special[random_int(0, count($special) - 1)];
-//         }
-
-//         $password[] = $select;
-//     };
-//     return $password;
-// };
-
 function get_letter(){
     //Array letters lowercase and uppercase
     $letters = range('a', 'z');
@@ -59,112 +20,75 @@ function get_special(){
 };
 
 function set_password($length, $option) {
-    var_dump($option);
-    if($option == 123 ){
+    $setA = 1;
+    $setB = 2;
+    $setC = 3;
+    $min = 1;
+    $max = 2;
 
-        for ($i = 0; $i < $length; $i++) {
-
-            //Random array select 
-            $type = random_int(1, 3);
-
-            if ($type === 1) {
-                $select = get_letter();
-            }
-            if ($type === 2) {
-                $select = get_number();
-            }
-            if ($type === 3) {
-                $select = get_special();
-            }
-
-            $password[] = $select;
-        };
-
-        return $password;
-
-    } elseif($option == 1){
-
-        for ($i = 0; $i < $length; $i++) {
-
-            $select = get_letter();
-
-            $password[] = $select;
-        };
-
-        return $password;
-
-    } elseif($option == 2){
-
-        for ($i = 0; $i < $length; $i++) {
-
-            $select = get_number();
-
-            $password[] = $select;
-        };
+    switch ($option) {
+        case 1:
+            $min = 1;
+            $max = 1;
+            break;
         
-        return $password;
+        case 2:
+            $min = 2;
+            $max = 2;
+            break;
 
-    } elseif($option == 3){
+        case 3:
+            $min = 3;
+            $max = 3;
+            break;
 
-        for ($i = 0; $i < $length; $i++) {
+        case 12:
+            $min = 1;
+            $max = 2;
+            break;
 
-            $select = get_special();
+        case 13:
+            $min = 1;
+            $max = 2;
+            $setB = 0;
+            $setC = 2;
+            break;
 
-            $password[] = $select;
-        };
-        return $password;
+        case 23:
+            $min = 1;
+            $max = 2;
+            $setA = 0;
+            $setC = 1;
+            break;
+        
+        case '':
+            header('Location: index.php?err=need-opt');
+            die();           
+            break;
 
-    } elseif($option == 12){
-
-        for ($i = 0; $i < $length; $i++) {
-
-            //Random array select 
-            $type = random_int(1, 2);
-
-            if ($type === 1) {
-                $select = get_letter();
-            }
-            if ($type === 2) {
-                $select = get_number();
-            }
-
-            $password[] = $select;
-        };
-        return $password;
-    } elseif($option == 13){
-
-        for ($i = 0; $i < $length; $i++) {
-
-            //Random array select 
-            $type = random_int(1, 2);
-
-            if ($type === 1) {
-                $select = get_letter();
-            }
-            if ($type === 2) {
-                $select = get_special();
-            }
-
-            $password[] = $select;
-        };
-        return $password;
-    } elseif($option == 23){
-
-        for ($i = 0; $i < $length; $i++) {
-
-            //Random array select 
-            $type = random_int(1, 2);
-
-            if ($type === 1) {
-                $select = get_number();
-            }
-            if ($type === 2) {
-                $select = get_special();
-            }
-
-            $password[] = $select;
-        };
-        return $password;
+        default:
+            $min = 1;
+            $max = 3;
+            break;
     }
+    for ($i = 0; $i < $length; $i++) {
+
+        //Random array select 
+        $type = random_int($min, $max);
+
+        if ($type === $setA) {
+            $select = get_letter();
+        }
+        if ($type === $setB) {
+            $select = get_number();
+        }
+        if ($type === $setC) {
+            $select = get_special();
+        }
+
+        $password[] = $select;
+    };
+
+    return $password;
 }
 ?>
